@@ -49,7 +49,7 @@ const ProductPanel = ({
       >
         <Box >{rank}</Box>
         <Box>
-          <a href={explorer} target="_blank">
+          <a href={explorer} target="_blank" rel="noreferrer">
             <Box>{name}</Box>
             <Text sx={{ fontSize: 1 }}>{symbol}</Text>
           </a>
