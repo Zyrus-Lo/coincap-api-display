@@ -51,7 +51,7 @@ export default function Home() {
       </Grid>
       {
         isLoading ? 
-        <Box sx={{textAlign: 'center'}}>
+        <Box my={5} sx={{textAlign: 'center'}}>
           <Spinner /> 
         </Box>
         : 
