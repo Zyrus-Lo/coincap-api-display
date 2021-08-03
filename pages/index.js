@@ -4,19 +4,15 @@ import Table from '../components/share/Table'
 import { Container, Input, Heading, Grid, Button, Box, Spinner} from 'theme-ui'
 
 import {
-  useQuery,
-  useMutation,
+  useQuery
 } from 'react-query'
-
 
 export default function Home() {
   
   const inputEl = useRef(null);
   const [tableData, setTableData] = useState([]);
 
- 
-
-  const { isLoading, data: initData, isSuccess } = useQuery('initData', () =>
+  const { isLoading, data:initData } = useQuery('initData', () =>
      fetch('https://api.coincap.io/v2/assets?limit=20').then(res =>
        res.json()
      ),
@@ -26,8 +22,6 @@ export default function Home() {
     setTableData(initData?.data)
    },[initData])
  
-   if (isLoading) return 'Loading...' 
-
   const onSearchClick = () => {
     let inputText = inputEl.current.value.toLowerCase();
     if(inputText){
@@ -45,7 +39,7 @@ export default function Home() {
 
   const onResetClick = () => {
     inputEl.current.value = '';
-    setTableData([]);
+    setTableData(initData?.data);
   }
   return (
     <Container p={4}>
@@ -55,15 +49,12 @@ export default function Home() {
         <Button onClick={onSearchClick} ml={[0,0,2]}>Search</Button>
         <Button onClick={onResetClick} ml={[0,0,2]}>Reset</Button>
       </Grid>
-      <Box>
-
-        {
-          ( !isLoading && tableData.length === 0) ? 'NO' : ''
-        }
-      </Box>
       {
         isLoading ? 
-        <Spinner /> : 
+        <Box sx={{textAlign: 'center'}}>
+          <Spinner /> 
+        </Box>
+        : 
         <Table apiData={tableData} />
       }
     </Container>
