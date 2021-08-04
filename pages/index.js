@@ -25,7 +25,7 @@ export default function Home() {
   const onSearchClick = () => {
     let inputText = inputEl.current.value.toLowerCase();
     if(inputText){
-      let filterResult = initData.filter(obj => {
+      let filterResult = tableData?.filter(obj => {
         if(obj.symbol.toLowerCase() === inputText || obj.name.toLowerCase() === inputText){
           return obj;
         }
